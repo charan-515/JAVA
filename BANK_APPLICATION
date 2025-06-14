@@ -1,0 +1,83 @@
+import java.util.*;
+abstract class BankAccount {
+	private String AccountHolderName;
+	private Double Balance;
+	public BankAccount(String AccountHolderName,double Balance)
+	{
+		this.AccountHolderName = AccountHolderName;
+		this.Balance = Balance;
+	}
+
+	public abstract void display();
+	public String getAccountHolderName()
+	{
+		return AccountHolderName;
+	}
+	public void setAccountHolderName(String AccountHolderName)
+	{
+		this.AccountHolderName = AccountHolderName;
+	}
+	public double getBalance()
+	{
+		return Balance;
+	}
+	public void setBalance(double bal)
+	{
+	this.Balance =  Balance;
+
+	}
+	public void deposit(double amount)
+	{
+		if(amount>0)
+		{
+			Balance += amount;
+			System.out.println("Amount deposited :" +amount);
+			System.out.println("Balance after depositing :" +Balance);
+
+		}
+		else
+			System.out.println("Enter the valid amount");
+	}
+	public void withdraw(double amount)
+	{
+		if(amount<Balance&&amount>0)
+		{
+			Balance -= amount;
+			System.out.println("Amount withdrawn :" +amount);
+			System.out.println("Balance after depositing :" +Balance);
+		}
+		else {
+			System.out.println("Enter the valid amount");
+		}
+	}
+
+}
+class SavingsAccount extends BankAccount {
+	public SavingsAccount(String AccountHolderName,double Balance)
+	{
+		super(AccountHolderName,Balance);
+
+	}
+	@Override
+	public void display()
+	{
+		System.out.println(getAccountHolderName());
+		System.out.println(getBalance());
+	}
+}
+
+public class Main {
+	public static void main(String[] args)
+	{
+	    Scanner sc = new Scanner(System.in);
+	    System.out.println("Enter the Account Holder Name :");
+	    String a = sc.next();
+	    System.out.println("Enter the Balance amount");
+	    double b = sc.nextDouble();
+	    BankAccount savings = new SavingsAccount(a,b);
+	    savings.deposit(1000.0);
+	    savings.withdraw(200.0);
+	    savings.display();
+	}
+	
+}
